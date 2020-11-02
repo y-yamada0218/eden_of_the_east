@@ -4,15 +4,16 @@
   width: auto;
 }
 
-.map {
+#map {
   width: calc(100vw - 350px);;
   height: auto;
-  background-color: blue;
 }
 
 .infomation {
   width: 410px;
   height: auto;
-  background-color: red;
+  background-color: #4b4858;
   position: relative;
+  border-left: 3px solid #3f385d;
+  box-shadow: 0 0 8px rgb(50, 50, 50);
 }
