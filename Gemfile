@@ -59,3 +59,9 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
 gem 'active_hash'
+#コントローラーで定義したインスタンス変数をビューのJavaScript内で使用出来る様にする。
+gem 'gon'
+#住所から緯度経度を算出する。
+gem 'geocoder'
+#環境変数を隠します。
+gem 'dotenv-rails'
