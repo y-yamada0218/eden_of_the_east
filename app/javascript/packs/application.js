@@ -8,6 +8,8 @@ require("@rails/ujs").start();
 require("@rails/activestorage").start();
 require("../channels");
 require("map");
+require("get_position");
+require("get_messages");
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
