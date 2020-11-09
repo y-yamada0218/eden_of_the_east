@@ -29,4 +29,7 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
 /.env
+/tmp/localhost-key.pem
+/tmp/localhost.pem
