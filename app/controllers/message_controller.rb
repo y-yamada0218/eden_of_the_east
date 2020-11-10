@@ -1,11 +1,4 @@
-class MapsController < ApplicationController
-
-  def index
-    @messages = Message.all
-  end
-
-  def show
-  end
+class MessageController < ApplicationController
 
   def create
     binding.pry
@@ -34,5 +27,7 @@ class MapsController < ApplicationController
   def set_range
     params[:range]
   end
+
+end
 
 end

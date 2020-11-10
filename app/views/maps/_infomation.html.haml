@@ -1,3 +1,52 @@
 .infomation
-  %button{:type => "submit", :id => "btn"}
-    更新する
+  .header
+    .info
+      .info__user
+        .info__user__img
+        .info__user__name
+          test
+      .info__user-cog
+        .cog1
+          %i.fas.fa-cog.icon
+        .cog2
+          .cog2__1
+            %i.fas.fa-cog.icon
+          .cog2__2
+            %i.fas.fa-cog.icon
+    .side-top
+      .app-icon
+    
+  .main-tab
+    .messagesBox
+      .messagesList
+        .message
+          = form_with url:, local: true do |f|
+            .message-form
+              .form-header
+              .form-container
+                .user-icon
+                .message-container
+                  .message-container__comment
+                    = f.text_area :comment,{required: "required", maxlength: '250', placeholder: ""}
+                  .message-container__footer
+                    .image-icon
+                      %i.fas.fa-image.icon
+                    .text-count
+            = f.submit '投稿'
+            
+      .messageUpdate
+        %button{:type => "submit", :id => "btn"}
+          更新する
+    .said-bar
+      .menu
+        #home-icon
+          %i.fas.fa-home.icon
+        #message-icon
+          %i.far.fa-comment-alt.icon
+        #search-icon
+          %i.fas.fa-search.icon
+        #position-icon
+          %i.fas.fa-crosshairs.icon
+        #mail-icon
+          %i.fas.fa-envelope.icon
+      .layout

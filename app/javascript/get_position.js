@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
       var marker = new google.maps.Marker({
         map : map,             // 対象の地図オブジェクト
         position : MyLatLng,   // 緯度・経度
-        animation: google.maps.Animation.DROP,
+        //animation: google.maps.Animation.DROP,
         //マーカーのデザイン
         icon: {
           fillColor: "#93d5ff",                //塗り潰し色
