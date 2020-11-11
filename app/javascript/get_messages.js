@@ -16,7 +16,9 @@ var btn = document.getElementById("btn");
                         ${message.comment}
                         </div>
                         <div class="message__info__time">
-                        ${message.created_at}
+                          <time datetime="${message.created_at}">
+                            ${moment(message.created_at).fromNow()}
+                          </time>
                         </div>
                       </div>
                       <div class="message__distance">
@@ -26,8 +28,8 @@ var btn = document.getElementById("btn");
                     `;
       return html;
     }
+    //ユーザの現在地からメッセージの座標までの距離を計算
     function searchRange(messagePosition,MyPosition) { 
-      console.log(MyPosition)
       lat1 = parseFloat(messagePosition[0]);
       lng1 = parseFloat(messagePosition[1]);
       lat2 = MyPosition[0];
@@ -38,10 +40,15 @@ var btn = document.getElementById("btn");
       lat2 *= Math.PI / 180;
       lng2 *= Math.PI / 180;
       
-      range = 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2));
-      range = range * 1000000;
+      range = 6371 * 
+              Math.acos(Math.cos(lat1) * 
+              Math.cos(lat2) * 
+              Math.cos(lng2 - lng1) + 
+              Math.sin(lat1) * 
+              Math.sin(lat2));
+      range = range * 10000;
       range = Math.round(range);
-      range = range / 1000000;
+      range = range / 10000;
       return range 
     }
 

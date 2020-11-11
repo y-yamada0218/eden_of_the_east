@@ -19,21 +19,24 @@
   .main-tab
     .messagesBox
       .messagesList
-        .message
-          = form_with url:, local: true do |f|
-            .message-form
-              .form-header
-              .form-container
-                .user-icon
-                .message-container
-                  .message-container__comment
-                    = f.text_area :comment,{required: "required", maxlength: '250', placeholder: ""}
-                  .message-container__footer
-                    .image-icon
-                      %i.fas.fa-image.icon
-                    .text-count
-            = f.submit '投稿'
-            
+        
+        -# .message-form
+        -#   = form_with url: messages_path, method: "POST", id: "new-message", local: true do |f|
+        -#     .message-form
+        -#       .form-header
+        -#       .form-container
+        -#         .user
+        -#           .icon
+        -#         .message-container
+        -#           = f.text_area :comment,{class: "message-container__comment", id: "comment_body", required: "required", maxlength: '250', placeholder: 'ここに何があるかみんなに共有しよう！'}
+        -#           .message-container__footer
+        -#             .image-icon
+        -#               %i.fas.fa-image.icon
+        -#             .text-count
+        -#               #inputCounter
+        -#               = "/250"
+        -#     = f.submit '投稿', class:"commentBtn"
+          
       .messageUpdate
         %button{:type => "submit", :id => "btn"}
           更新する

@@ -1,4 +1,7 @@
+// const yamada = "yamada"
+// export {yamada};
 window.addEventListener('load', function () {
+
 
   document.getElementById("mail-icon").onclick = function() {
     var home_icon = document.getElementById('home-icon');
@@ -11,8 +14,10 @@ window.addEventListener('load', function () {
     message_icon.style.color = '#909096';
     search_icon.style.color = '#909096';
     position_icon.style.color = '#909096';
-    mail_icon.style.color = '#fff';
+    mail_icon.style.color = '#5bf7fc';
 
-    
+    $('.message').remove();
+    $('.message-form').remove();
+
   };
 })

@@ -1,15 +1,6 @@
 class MapsController < ApplicationController
 
   def index
-    @messages = Message.all
-  end
-
-  def show
-  end
-
-  def create
-    binding.pry
-    @message = Message.new(message_params)
   end
 
   def message
@@ -22,10 +13,6 @@ class MapsController < ApplicationController
   end
 
   private
-
-  def message_params
-    params.require(:message).permit()
-  end
 
   def set_position
     params[:position]

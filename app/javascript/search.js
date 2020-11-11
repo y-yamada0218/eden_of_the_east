@@ -1,3 +1,6 @@
+// import {yamada} from "./mail.js"
+// console.log(yamada)
+
 window.addEventListener('load', function () {
 
   document.getElementById("search-icon").onclick = function() {
@@ -9,10 +12,11 @@ window.addEventListener('load', function () {
 
     home_icon.style.color = '#909096';
     message_icon.style.color = '#909096';
-    search_icon.style.color = '#fff';
+    search_icon.style.color = '#5bf7fc';
     position_icon.style.color = '#909096';
     mail_icon.style.color = '#909096';
 
-    
+    $('.message').remove();
+    $('.message-form').remove();
   };
 })

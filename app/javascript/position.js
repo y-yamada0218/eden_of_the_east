@@ -10,9 +10,10 @@ window.addEventListener('load', function () {
     home_icon.style.color = '#909096';
     message_icon.style.color = '#909096';
     search_icon.style.color = '#909096';
-    position_icon.style.color = '#fff';
+    position_icon.style.color = '#5bf7fc';
     mail_icon.style.color = '#909096';
 
-    
+    $('.message').remove();
+    $('.message-form').remove();
   };
 })
