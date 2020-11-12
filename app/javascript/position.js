@@ -1,5 +1,4 @@
 window.addEventListener('load', function () {
-
   document.getElementById("position-icon").onclick = function() {
     var home_icon = document.getElementById('home-icon');
     var message_icon = document.getElementById('message-icon');

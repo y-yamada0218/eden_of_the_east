@@ -1,8 +1,6 @@
 // const yamada = "yamada"
 // export {yamada};
 window.addEventListener('load', function () {
-
-
   document.getElementById("mail-icon").onclick = function() {
     var home_icon = document.getElementById('home-icon');
     var message_icon = document.getElementById('message-icon');

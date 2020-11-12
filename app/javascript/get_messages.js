@@ -3,8 +3,15 @@ var btn = document.getElementById("btn");
   btn.addEventListener('click', function() {  
 
     function buildMessageHTML(message,messagePosition,MyPosition) { 
+      var range = searchRange(messagePosition,MyPosition);
       const html = `
                     <div class="message">
+                      <input type="hidden" name="comment" value="${message.comment}">
+                      <input type="hidden" name="latitude" value="${messagePosition[0]}">
+                      <input type="hidden" name="longitude" value="${messagePosition[1]}">
+                      <input type="hidden" name="range" value="${range}">
+                      <input type="hidden" name="time" value="${message.created_at}">
+                      <input type="hidden" name="user_name" value="${message.user_name}">
                       <div class="message__user">
                         <div class="message__user__img"></div>
                         <div class="message__user__name">
@@ -22,11 +29,15 @@ var btn = document.getElementById("btn");
                         </div>
                       </div>
                       <div class="message__distance">
-                        現在地からの距離：  ${searchRange(messagePosition,MyPosition)}km
+                        現在地からの距離：  ${range}km
                       </div>
                     </div>
                     `;
       return html;
+    }
+
+    function buildDetailMessageHTML(comment, lat, lng, range, time, user_name) {
+      
     }
     //ユーザの現在地からメッセージの座標までの距離を計算
     function searchRange(messagePosition,MyPosition) { 
@@ -77,8 +88,6 @@ var btn = document.getElementById("btn");
           dataType: 'json',
         })
           .done(function(messages){
-             //コントローラで取得したメッセージをJSで取得
-
             var Options = {
               zoom: 13.5,      //地図の縮尺値
               center: MyLatLng,    //地図の中心座標
@@ -116,6 +125,21 @@ var btn = document.getElementById("btn");
                 var html = buildMessageHTML(messages[i],messagePosition,MyPosition);
                 $('.messagesList').append(html);
               }
+
+              //クリックされたメッセージの情報を表示
+              $('.message').click(function() {
+                //(this) を指定してあげると選択された要素が何番目
+                var comment = $(this).children(':hidden[name="comment"]').val();
+                var lat = $(this).children(':hidden[name="latitude"]').val();
+                var lng = $(this).children(':hidden[name="longitude"]').val();
+                var range = $(this).children(':hidden[name="range"]').val();
+                var time = $(this).children(':hidden[name="time"]').val();
+                var user_name = $(this).children(':hidden[name="user_name"]').val();
+
+                $('.message').remove();
+                var detailMessagehtml = buildDetailMessageHTML(comment, lat, lng, range, time, user_name);
+                $('.messagesList').append(detailMessagehtml);
+              })
           })
           .fail(function(){
             alert('error');

@@ -8,13 +8,13 @@ require("@rails/ujs").start();
 require("@rails/activestorage").start();
 require("../channels");
 require("map");
-require("home");
 require("search");
-require("mail");
 require("position");
+require("mail");
 require("get_position");
 require("get_messages");
 require("post_message");
+require("home");
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

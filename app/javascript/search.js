@@ -1,8 +1,6 @@
 // import {yamada} from "./mail.js"
 // console.log(yamada)
-
 window.addEventListener('load', function () {
-
   document.getElementById("search-icon").onclick = function() {
     var home_icon = document.getElementById('home-icon');
     var message_icon = document.getElementById('message-icon');

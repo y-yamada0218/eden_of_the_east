@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    message = params.permit(:comment, :latitude, :longitude).merge(user_id: current_user.id)
+    params.permit(:comment, :latitude, :longitude).merge(user_id: current_user.id)
   end
 
 end
