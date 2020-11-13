@@ -93,7 +93,7 @@ body {
   width: 85%;
   height: auto;
   .messagesList {
-    height: 85%;
+    height: 95%;
     width: 100%;
     background-color: #5e5e68;
     overflow: scroll;
@@ -142,10 +142,25 @@ body {
     }
   }
   .messageUpdate {
-    height: 15%;
-    width: auto;
-    position: relative;
-    border-top: 1px solid #9d9da1;
+    outline:0;
+    font-weight: bolder;
+    justify-content: center;
+    box-sizing: border-box;
+    line-height: 40px;
+    background: #424350;
+    border: 3px solid #5bf7fc;
+    // box-shadow: 0 0 10px rgb(94, 180, 255);
+    color: #fff;
+    width: 75px;
+    height: 75px;
+    font-size: 18px;
+    border-radius: 50%;
+    margin: 0 40px 20px 80px;
+    text-align: center;
+    bottom: 32px;
+    right: 45px;
+    padding: 15px;
+    position: absolute;
   }
 }
 

@@ -14,7 +14,11 @@ window.addEventListener('load', function () {
     position_icon.style.color = '#909096';
     mail_icon.style.color = '#5bf7fc';
 
-    $('.message').remove();
+    $('.messageUpdate').hide();
+    $('.message').hide();
+    $('.config-position').hide();
+    $('.back-icon').remove();
+    $('.detailMessage').remove();
     $('.message-form').remove();
 
   };

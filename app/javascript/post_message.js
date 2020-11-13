@@ -39,8 +39,12 @@ window.addEventListener('load', function () {
     position_icon.style.color = '#909096';
     mail_icon.style.color = '#909096'; 
 
-    $('.message').remove();
+    $('.messageUpdate').hide();
+    $('.message').hide();
+    $('.config-position').hide();
+    $('.back-icon').remove();
     $('.message-form').remove();
+    $('.detailMessage').remove();
     $('.messagesList').append(html);
     $('.message-form').hide().fadeIn(200);
 

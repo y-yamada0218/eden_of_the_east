@@ -1,4 +1,5 @@
 window.addEventListener('load', function () {
+  $('.config-position').hide();
   document.getElementById("position-icon").onclick = function() {
     var home_icon = document.getElementById('home-icon');
     var message_icon = document.getElementById('message-icon');
@@ -12,7 +13,11 @@ window.addEventListener('load', function () {
     position_icon.style.color = '#5bf7fc';
     mail_icon.style.color = '#909096';
 
-    $('.message').remove();
+    $('.messageUpdate').hide();
+    $('.message').hide();
+    $('.back-icon').remove();
+    $('.detailMessage').remove();
     $('.message-form').remove();
+    $('.config-position').show();
   };
 })

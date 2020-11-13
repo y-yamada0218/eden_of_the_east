@@ -6,21 +6,49 @@
         .info__user__name
           test
       .info__user-cog
-        .cog1
-          %i.fas.fa-cog.icon
-        .cog2
-          .cog2__1
-            %i.fas.fa-cog.icon
-          .cog2__2
-            %i.fas.fa-cog.icon
+        %i.fas.fa-angle-down.icon
     .side-top
       .app-icon
     
   .main-tab
     .messagesBox
       .messagesList
-        .detailMessage
-        
+        .config-position
+          設定画面
+
+      
+        -# .detailMessage
+        -#   .detailMessage__header
+        -#     .user-info
+        -#       .icon
+        -#       .name
+        -#         test
+        -#     .menu
+        -#       %i.fas.fa-angle-down.icon
+        -#   .detailMessage__contener
+        -#     .comment-info
+        -#       .comment
+        -#         うんこ落ちてた
+        -#       .time 
+        -#         17:54 2020-11-20
+        -#     .distance
+        -#       現在地からの距離：
+        -#     .position
+        -#       .latitude
+        -#         = "緯度：  "
+        -#       .longitude
+        -#         = "経度：  "
+        -#   .detailMessage__footer
+        -#     .menu
+        -#       #comment-icon
+        -#         %i.fas.fa-comment-dots.icon
+        -#       #favorit-icon
+        -#         %i.far.fa-heart.icon
+        -#       #mail-icon
+        -#         %i.fas.fa-envelope.icon
+        -#     .problemReport
+        -#       #report-icon
+        -#         %i.fas.fa-exclamation-circle.icon
         
         -# .message-form
         -#   = form_with url: messages_path, method: "POST", id: "new-message", local: true do |f|
@@ -39,9 +67,8 @@
         -#               = "/250"
         -#     = f.submit '投稿', class:"commentBtn"
           
-      .messageUpdate
-        %button{:type => "submit", :id => "btn"}
-          更新する
+        %button{:class => "messageUpdate", :type => "submit", :id => "btn"}
+          更新
     .said-bar
       .menu
         #home-icon

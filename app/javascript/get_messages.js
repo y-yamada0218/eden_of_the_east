@@ -1,3 +1,5 @@
+// import map from "./get_position"
+
 window.addEventListener('load', function () {
 var btn = document.getElementById("btn");
   btn.addEventListener('click', function() {  
@@ -6,12 +8,7 @@ var btn = document.getElementById("btn");
       var range = searchRange(messagePosition,MyPosition);
       const html = `
                     <div class="message">
-                      <input type="hidden" name="comment" value="${message.comment}">
-                      <input type="hidden" name="latitude" value="${messagePosition[0]}">
-                      <input type="hidden" name="longitude" value="${messagePosition[1]}">
-                      <input type="hidden" name="range" value="${range}">
-                      <input type="hidden" name="time" value="${message.created_at}">
-                      <input type="hidden" name="user_name" value="${message.user_name}">
+                      <input type="hidden" name="message_id" value="${message.id}">
                       <div class="message__user">
                         <div class="message__user__img"></div>
                         <div class="message__user__name">
@@ -36,9 +33,70 @@ var btn = document.getElementById("btn");
       return html;
     }
 
-    function buildDetailMessageHTML(comment, lat, lng, range, time, user_name) {
-      
+    function buildDetailMessageHTML(messageData, MyPosition) {
+      var messagePosition = [];
+      messagePosition.push(messageData.latitude,messageData.longitude);
+      var range = searchRange(messagePosition,MyPosition);
+      var detailMessagehtml = `
+                              <div class="detailMessage">
+                                <div class="detailMessage__header">
+                                  <div class="user-info">
+                                    <div class="icon"></div>
+                                    <div class="name">
+                                      ${messageData.user_name}
+                                    </div>
+                                  </div>
+                                  <div class="menu">
+                                    <i class="fas fa-angle-down icon"></i>
+                                  </div>
+                                </div>
+                                <div class="detailMessage__contener">
+                                  <div class="comment-info">
+                                    <div class="comment">
+                                    ${messageData.comment}
+                                  </div>
+                                  <div class="time">
+                                    ${messageData.created_at}
+                                  </div>
+                                </div>
+                              <div class="distance">
+                                現在地からの距離：  ${range}km
+                              </div>
+                                <div class="position">
+                                  <div class="latitude">
+                                    緯度：  ${messageData.latitude}
+                                  </div>
+                                  <div class="longitude">
+                                    経度：  ${messageData.longitude}
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="detailMessage__footer">
+                                <div class="menu">
+                                  <div id="comment-icon">
+                                    <i class="fas fa-comment-dots icon"></i>
+                                  </div>
+                                  <div id="favorit-icon">
+                                    <i class="far fa-heart icon"></i>
+                                  </div>
+                                  <div id="DM-icon">
+                                    <i class="fas fa-envelope icon"></i>
+                                  </div>
+                                </div>
+                              <div class="problemReport">
+                                <div id="report-icon">
+                                  <i class="fas fa-exclamation-circle icon"></i>
+                                </div>
+                              </div>
+                              </div>
+                              </div>
+                              <div class="back-icon">
+                                <i class="fas fa-angle-double-left icon"></i>
+                              </div>
+                              `
+      return detailMessagehtml
     }
+
     //ユーザの現在地からメッセージの座標までの距離を計算
     function searchRange(messagePosition,MyPosition) { 
       lat1 = parseFloat(messagePosition[0]);
@@ -63,9 +121,8 @@ var btn = document.getElementById("btn");
       return range 
     }
 
-
     //マップに表示させるための配列
-    var marker = [];
+    var messageMarker = [];
     //現在地のみの配列
     var MyPosition = [];
     const url = '/message';
@@ -89,11 +146,10 @@ var btn = document.getElementById("btn");
         })
           .done(function(messages){
             var Options = {
-              zoom: 13.5,      //地図の縮尺値
+              zoom: 15.5,      //地図の縮尺値
               center: MyLatLng,    //地図の中心座標
               mapTypeId: 'roadmap'   //地図の種類
             };
-
             var map = new google.maps.Map(
               document.getElementById('map'), Options
             );
@@ -114,31 +170,85 @@ var btn = document.getElementById("btn");
             $('.message').remove();
               //地点のメッセージを表示
               for (var i = 0; i < messages.length; i++) {
+                const marker_id = messages[i].id
                 var messagePosition = [];
                 var MessageLatLng = new google.maps.LatLng(messages[i].latitude, messages[i].longitude);
                 messagePosition.push(messages[i].latitude, messages[i].longitude);
-                marker = new google.maps.Marker({
+                markers = new google.maps.Marker({
+                  id : messages[i].id,
                   map : map,             // 対象の地図オブジェクト
                   position : MessageLatLng,   // 緯度・経度
                   animation: google.maps.Animation.DROP
                 });
+                //取得したメッセージを表示させる
                 var html = buildMessageHTML(messages[i],messagePosition,MyPosition);
                 $('.messagesList').append(html);
+                console.log(marker_id)
+                // マーカーをクリックしたとき
+                markers.addListener('click', function() {
+                  var url = '/messages/' + marker_id
+
+                  $.ajax({
+                    url: url,
+                    type: "get",
+                    dataType: 'json',
+                  })
+                  .done(function(messageData){
+                    //メッセージ一覧を隠す
+                    $('.message').hide();
+                    $('.messageUpdate').hide();
+                    $('.config-position').hide();
+                    $('.detailMessage').remove();
+                    $('.back-icon').remove();
+                    var detailMessagehtml = buildDetailMessageHTML(messageData, MyPosition);
+                    $('.messagesList').append(detailMessagehtml);
+                    map.panTo(new google.maps.LatLng(messageData.latitude,messageData.longitude));
+
+                    //backした時
+                    $('.back-icon').click(function() {
+                      $('.detailMessage').remove();
+                      $('.back-icon').remove();
+                      $('.message').show();
+                      $('.messageUpdate').show();
+                    })
+                  })
+                  .fail(function() {
+                    alert("メッセージ送信に失敗しました");
+                  });
+                });
               }
+
 
               //クリックされたメッセージの情報を表示
               $('.message').click(function() {
                 //(this) を指定してあげると選択された要素が何番目
-                var comment = $(this).children(':hidden[name="comment"]').val();
-                var lat = $(this).children(':hidden[name="latitude"]').val();
-                var lng = $(this).children(':hidden[name="longitude"]').val();
-                var range = $(this).children(':hidden[name="range"]').val();
-                var time = $(this).children(':hidden[name="time"]').val();
-                var user_name = $(this).children(':hidden[name="user_name"]').val();
+                var message_id = $(this).children(':hidden[name="message_id"]').val();
+                var url = '/messages/' + message_id
 
-                $('.message').remove();
-                var detailMessagehtml = buildDetailMessageHTML(comment, lat, lng, range, time, user_name);
-                $('.messagesList').append(detailMessagehtml);
+                $.ajax({
+                  url: url,
+                  type: "get",
+                  dataType: 'json',
+                })
+                .done(function(messageData){
+                  //メッセージ一覧を隠す
+                  $('.message').hide();
+                  $('.messageUpdate').hide();
+                  var detailMessagehtml = buildDetailMessageHTML(messageData,MyPosition);
+                  $('.messagesList').append(detailMessagehtml);
+                  //マップメッセージの座標に移動
+                  map.panTo(new google.maps.LatLng(messageData.latitude,messageData.longitude));
+                  //backした時
+                  $('.back-icon').click(function() {
+                    $('.detailMessage').remove();
+                    $('.back-icon').remove();
+                    $('.message').show();
+                    $('.messageUpdate').show();
+                  })
+                })
+                .fail(function() {
+                  alert("メッセージ送信に失敗しました");
+                });
               })
           })
           .fail(function(){
