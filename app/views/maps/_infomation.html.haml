@@ -14,8 +14,16 @@
     .messagesBox
       .messagesList
         .config-position
-          設定画面
-
+          .tab-name
+            検索条件の設定
+          .select-name
+            検索日時
+          .cp_ipselect.cp_sl04
+            = select_tag :time, options_from_collection_for_select(SearchConditions.all, :value, :name, {selected: @search_info1})
+          .select-name
+            検索範囲
+          .cp_ipselect.cp_sl04
+            = select_tag :range, options_from_collection_for_select(SearchRange.all,  :value, :name, {selected: @search_info2})
       
         -# .detailMessage
         -#   .detailMessage__header

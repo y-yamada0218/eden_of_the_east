@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
 
   def index
+    @search_info1 = 2160
+    @search_info2 = 10
   end
 
   def message

@@ -19,5 +19,21 @@ window.addEventListener('load', function () {
     $('.detailMessage').remove();
     $('.message-form').remove();
     $('.config-position').show();
+
+    var selectedValue = $("#time").val();
+    console.log(selectedValue)
+
+    var select1 = document.querySelector("#time")
+    select1.addEventListener('change', function(){
+      var searchTime_id = $("#time").val();
+      console.log(searchTime_id)
+    })
+
+    var select2 = document.querySelector("#range")
+    select2.addEventListener('change', function(){
+      var searchRange_id = $("#range").val();
+      console.log(searchRange_id)
+    })
+
   };
 })
