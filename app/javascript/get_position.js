@@ -1,4 +1,5 @@
-window.addEventListener('load', () => {
+import {map} from "./packs/application.js"
+  window.addEventListener('load', () => {
   //Geolocation APIに対応しているかどうか判断
   if (navigator.geolocation){
     //【参考記事】https://qiita.com/Haruka-Ogawa/items/997401a2edcd20e61037
@@ -7,18 +8,18 @@ window.addEventListener('load', () => {
       function getPosition(position) {
       //緯度・経度を変数に格納
       var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      //googlemapの設定を変数に格納
+      //googlemapの設定を変数に格納 
       var Options = {
         zoom: 13.5,      //地図の縮尺値
         center: MyLatLng,    //地図の中心座標
         mapTypeId: 'roadmap'   //地図の種類
       };
-      //【マップ作成】設定したオプション設定(変数:Options)を指定し、Mapクラスを利用して、マップオブジェクトを作成。
-      var map = new google.maps.Map(
-        document.getElementById('map'), Options);
-      //　マップにマーカーを表示する
+      // 【マップ作成】新たに設定したオプション設定(変数:Options)を指定し、Mapクラスを利用して、マップオブジェクトを再定義。
+      map.setOptions(Options);
+
       var marker = new google.maps.Marker({
         map : map,             // 対象の地図オブジェクト
+        center: MyLatLng,    //地図の中心座標
         position : MyLatLng,   // 緯度・経度
         animation: google.maps.Animation.DROP,
         //マーカーのデザイン
@@ -31,6 +32,11 @@ window.addEventListener('load', () => {
           strokeWeight: 1.0                    //枠の透過率
         }
       });
+      //過去の現在地を削除
+      var btn = document.getElementById("btn");
+      btn.addEventListener('click', function() {  
+        marker.setMap(null);
+      })
     },
       function(error) {
         // エラーメッセージを表示
@@ -52,4 +58,5 @@ window.addEventListener('load', () => {
     );
   }
 })
+
 
