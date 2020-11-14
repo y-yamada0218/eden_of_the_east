@@ -12,7 +12,6 @@ window.addEventListener('load', () => {
     mapTypeId: 'roadmap'   //地図の種類
   };
   map = new google.maps.Map(document.getElementById('map'), Options);
-  console.log(map)
 })
 
 require("@rails/ujs").start();

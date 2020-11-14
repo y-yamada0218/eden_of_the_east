@@ -2,8 +2,8 @@ class Message < ApplicationRecord
   
   belongs_to :user
 
-  def self.search_from_current_location(my_position,range)
-    messages = Message.all
+  def self.search_from_current_location(my_position,range,search_time)
+    messages = Message.where(created_at: search_time.hours.ago..)
     within_messages = []
     my_lat = my_position[0]
     my_lng = my_position[1]

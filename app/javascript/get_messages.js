@@ -1,5 +1,4 @@
 // import map from "./get_position"
-
 window.addEventListener('load', function () {
 var btn = document.getElementById("btn");
   btn.addEventListener('click', function() {  
@@ -39,6 +38,9 @@ var btn = document.getElementById("btn");
       var range = searchRange(messagePosition,MyPosition);
       var detailMessagehtml = `
                               <div class="detailMessage">
+                                <div class="back-icon">
+                                  <i class="fas fa-angle-double-left icon"></i>
+                                </div>
                                 <div class="detailMessage__header">
                                   <div class="user-info">
                                     <div class="icon"></div>
@@ -62,14 +64,18 @@ var btn = document.getElementById("btn");
                               <div class="distance">
                                 現在地からの距離：  ${range}km
                               </div>
-                                <div class="position">
-                                  <div class="latitude">
-                                    緯度：  ${messageData.latitude}
+                                <div class="position-route">
+                                  <div class="position">
+                                    <div class="latitude">
+                                      緯度：  ${messageData.latitude}
+                                    </div>
+                                    <div class="longitude">
+                                      経度：  ${messageData.longitude}
+                                    </div>
                                   </div>
-                                  <div class="longitude">
-                                    経度：  ${messageData.longitude}
+                                  <div class="route">
+                                    <i class="fas fa-route"></i>
                                   </div>
-                                </div>
                               </div>
                               <div class="detailMessage__footer">
                                 <div class="menu">
@@ -89,9 +95,6 @@ var btn = document.getElementById("btn");
                                 </div>
                               </div>
                               </div>
-                              </div>
-                              <div class="back-icon">
-                                <i class="fas fa-angle-double-left icon"></i>
                               </div>
                               `
       return detailMessagehtml
@@ -121,8 +124,6 @@ var btn = document.getElementById("btn");
       return range 
     }
 
-    //マップに表示させるための配列
-    var messageMarker = [];
     //現在地のみの配列
     var MyPosition = [];
     const url = '/message';
@@ -135,18 +136,16 @@ var btn = document.getElementById("btn");
         var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         //現在の位置情報を格納する
         MyPosition.push(position.coords.latitude, position.coords.longitude);
-        //検索範囲を格納
-        var searchRange = 20;
 
         jQuery.ajax({
           url: url,
           type: "POST",
-          data: {position: MyPosition, range: searchRange},
+          data: {position: MyPosition},
           dataType: 'json',
         })
           .done(function(messages){
             var Options = {
-              zoom: 15.5,      //地図の縮尺値
+              zoom: 14,      //地図の縮尺値
               center: MyLatLng,    //地図の中心座標
               mapTypeId: 'roadmap'   //地図の種類
             };
@@ -169,54 +168,57 @@ var btn = document.getElementById("btn");
             });
             $('.message').remove();
               //地点のメッセージを表示
-              for (var i = 0; i < messages.length; i++) {
-                const marker_id = messages[i].id
-                var messagePosition = [];
-                var MessageLatLng = new google.maps.LatLng(messages[i].latitude, messages[i].longitude);
-                messagePosition.push(messages[i].latitude, messages[i].longitude);
-                markers = new google.maps.Marker({
-                  id : messages[i].id,
-                  map : map,             // 対象の地図オブジェクト
-                  position : MessageLatLng,   // 緯度・経度
-                  animation: google.maps.Animation.DROP
-                });
-                //取得したメッセージを表示させる
-                var html = buildMessageHTML(messages[i],messagePosition,MyPosition);
-                $('.messagesList').append(html);
-                console.log(marker_id)
-                // マーカーをクリックしたとき
-                markers.addListener('click', function() {
-                  var url = '/messages/' + marker_id
+            for (var i = 0; i < messages.length; i++) {
+              const marker_id = messages[i].id
+              var messagePosition = [];
+              var MessageLatLng = new google.maps.LatLng(messages[i].latitude, messages[i].longitude);
+              messagePosition.push(messages[i].latitude, messages[i].longitude);
+              markers = new google.maps.Marker({
+                id : messages[i].id,
+                map : map,             // 対象の地図オブジェクト
+                position : MessageLatLng,   // 緯度・経度
+                animation: google.maps.Animation.DROP
+              });
+              //取得したメッセージを表示させる
+              var html = buildMessageHTML(messages[i],messagePosition,MyPosition);
+              $('.messagesList').append(html);
+              $('.message').hide();
+              $('.message').slideDown(300);
+              // マーカーをクリックしたとき
+              markers.addListener('click', function() {
+                var url = '/messages/' + marker_id
 
-                  $.ajax({
-                    url: url,
-                    type: "get",
-                    dataType: 'json',
-                  })
-                  .done(function(messageData){
-                    //メッセージ一覧を隠す
-                    $('.message').hide();
-                    $('.messageUpdate').hide();
-                    $('.config-position').hide();
+                $.ajax({
+                  url: url,
+                  type: "get",
+                  dataType: 'json',
+                })
+                .done(function(messageData){
+                  //メッセージ一覧を隠す
+                  $('.message').hide();
+                  $('.messageUpdate').hide();
+                  $('.config-position').hide();
+                  $('.detailMessage').remove();
+                  //$('.back-icon').remove();
+                  var detailMessagehtml = buildDetailMessageHTML(messageData, MyPosition);
+                  $('.messagesList').append(detailMessagehtml);
+                  map.panTo(new google.maps.LatLng(messageData.latitude,messageData.longitude));
+
+                  //経路ボタンを押した時
+
+                  //backした時
+                  $('.back-icon').click(function() {
                     $('.detailMessage').remove();
-                    $('.back-icon').remove();
-                    var detailMessagehtml = buildDetailMessageHTML(messageData, MyPosition);
-                    $('.messagesList').append(detailMessagehtml);
-                    map.panTo(new google.maps.LatLng(messageData.latitude,messageData.longitude));
-
-                    //backした時
-                    $('.back-icon').click(function() {
-                      $('.detailMessage').remove();
-                      $('.back-icon').remove();
-                      $('.message').show();
-                      $('.messageUpdate').show();
-                    })
+                    //$('.back-icon').remove();
+                    $('.message').show();
+                    $('.messageUpdate').show();
                   })
-                  .fail(function() {
-                    alert("メッセージ送信に失敗しました");
-                  });
+                })
+                .fail(function() {
+                  alert("メッセージ送信に失敗しました");
                 });
-              }
+              });
+            }
 
 
               //クリックされたメッセージの情報を表示
@@ -241,7 +243,6 @@ var btn = document.getElementById("btn");
                   //backした時
                   $('.back-icon').click(function() {
                     $('.detailMessage').remove();
-                    $('.back-icon').remove();
                     $('.message').show();
                     $('.messageUpdate').show();
                   })

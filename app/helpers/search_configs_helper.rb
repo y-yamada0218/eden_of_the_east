@@ -1,0 +1,2 @@
+module SearchConfigsHelper
+end

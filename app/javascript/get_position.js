@@ -10,7 +10,7 @@ import {map} from "./packs/application.js"
       var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       //googlemapの設定を変数に格納 
       var Options = {
-        zoom: 13.5,      //地図の縮尺値
+        zoom: 14,      //地図の縮尺値
         center: MyLatLng,    //地図の中心座標
         mapTypeId: 'roadmap'   //地図の種類
       };

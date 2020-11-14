@@ -4,9 +4,13 @@ class MapsController < ApplicationController
   end
 
   def message
+    #ユーザの現在地
     position = set_position
-    searchRange = set_range
-    @messages = Message.search_from_current_location(position,searchRange)
+    #ユーザが設定している検索範囲
+    searchRange = current_user.search_config.range
+    #ユーザが設定時ている検索時間
+    searchTime = current_user.search_config.time
+    @messages = Message.search_from_current_location(position,searchRange,searchTime)
     if @messages == []
       flash[:alert] = '周辺情報が見つかりませんでした。再度、条件を変えて検索してください。'
     end
@@ -18,8 +22,5 @@ class MapsController < ApplicationController
     params[:position]
   end
 
-  def set_range
-    params[:range]
-  end
 
 end
