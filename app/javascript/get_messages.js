@@ -124,8 +124,6 @@ var btn = document.getElementById("btn");
       return range 
     }
 
-    //マップに表示させるための配列
-    var messageMarker = [];
     //現在地のみの配列
     var MyPosition = [];
     const url = '/message';
@@ -138,13 +136,11 @@ var btn = document.getElementById("btn");
         var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         //現在の位置情報を格納する
         MyPosition.push(position.coords.latitude, position.coords.longitude);
-        //検索範囲を格納
-        var searchRange = 20;
 
         jQuery.ajax({
           url: url,
           type: "POST",
-          data: {position: MyPosition, range: searchRange},
+          data: {position: MyPosition},
           dataType: 'json',
         })
           .done(function(messages){
@@ -188,7 +184,6 @@ var btn = document.getElementById("btn");
               $('.messagesList').append(html);
               $('.message').hide();
               $('.message').slideDown(300);
-              console.log(marker_id)
               // マーカーをクリックしたとき
               markers.addListener('click', function() {
                 var url = '/messages/' + marker_id
@@ -248,7 +243,6 @@ var btn = document.getElementById("btn");
                   //backした時
                   $('.back-icon').click(function() {
                     $('.detailMessage').remove();
-                    //$('.back-icon').remove();
                     $('.message').show();
                     $('.messageUpdate').show();
                   })

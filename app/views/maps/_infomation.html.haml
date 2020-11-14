@@ -2,7 +2,8 @@
   .header
     .info
       .info__user
-        .info__user__img
+        = link_to destroy_user_session_path, method:"delete" do
+          .info__user__img
         .info__user__name
           test
       .info__user-cog
@@ -14,16 +15,18 @@
     .messagesBox
       .messagesList
         .config-position
+          %input{name: "config_id", type: "hidden", value: current_user.search_config.id}
           .tab-name
             検索条件の設定
           .select-name
             検索日時
           .cp_ipselect.cp_sl04
-            = select_tag :time, options_from_collection_for_select(SearchConditions.all, :value, :name, {selected: @search_info1})
+            -# ネームを入れてそこのValueをJsで取ってこうとしたが
+            = select_tag :time, options_from_collection_for_select(SearchConditions.all, :value, :name, {selected: current_user.search_config.time})
           .select-name
             検索範囲
           .cp_ipselect.cp_sl04
-            = select_tag :range, options_from_collection_for_select(SearchRange.all,  :value, :name, {selected: @search_info2})
+            = select_tag :range, options_from_collection_for_select(SearchRange.all,  :value, :name, {selected: current_user.search_config.range})
       
         -# .detailMessage
         -#   .detailMessage__header
