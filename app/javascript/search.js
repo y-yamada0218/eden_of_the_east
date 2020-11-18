@@ -1,5 +1,3 @@
-// import {yamada} from "./mail.js"
-// console.log(yamada)
 window.addEventListener('load', function () {
   document.getElementById("search-icon").onclick = function() {
     var home_icon = document.getElementById('home-icon');
@@ -16,7 +14,8 @@ window.addEventListener('load', function () {
 
     $('.messageUpdate').hide();
     $('.config-position').hide();
-    $('.message').hide();
+    $('.messagesList').hide();
+    $('.back-icon').remove();
     $('.back-icon').remove();
     $('.detailMessage').remove();
     $('.message-form').remove();

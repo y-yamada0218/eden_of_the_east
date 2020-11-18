@@ -1,4 +1,19 @@
 window.addEventListener("load", function() {
+  // const obj = {
+  //   name: "yogo",
+  //   age: "18",
+  //   speak: function() {
+  //     console.log("hello");
+  //   }
+  // }
+
+  // obj.color = "violet"
+
+  // console.log(obj);
+
+
+
+
 
   // let rendererOptions = {
   //   map: map, // 描画先の地図

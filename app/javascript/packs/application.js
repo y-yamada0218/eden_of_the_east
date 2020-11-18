@@ -3,15 +3,15 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-let map;
-export {map}
+let load_map;
+export {load_map}
 
 window.addEventListener('load', () => {
   var Options = {
     zoom: 13.5,      //地図の縮尺値
     mapTypeId: 'roadmap'   //地図の種類
   };
-  map = new google.maps.Map(document.getElementById('map'), Options);
+  load_map = new google.maps.Map(document.getElementById('map'), Options);
 })
 
 require("@rails/ujs").start();
@@ -19,14 +19,20 @@ require("@rails/ujs").start();
 require("@rails/activestorage").start();
 require("../channels");
 require("get_position");
-require("map");
+require("home");
+require("post_message");
 require("search");
 require("position");
 require("mail");
+require("favorite");
+require("comments");
+require("calc_range");
+require("build_html");
+require("click_marker");
+require("click_messages");
 require("get_messages");
-require("post_message");
-require("home");
 require("test");
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

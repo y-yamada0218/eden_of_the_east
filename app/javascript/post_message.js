@@ -1,4 +1,7 @@
+import {userLoad_map} from "./get_messages.js"
+import {load_map} from "./packs/application.js"
 window.addEventListener('load', function () {
+  $('.message-form').hide()
   var html = `
               <div class="message-form">
                 <form id="new-message" action="/messages" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="MDtDXFWjHUb5Ug3DWyVicKjro7ZVR8ABfODhWJ/Ai2AGRDwGx6ieIU5F9QSxm6Em1ZZoeQ/bVL75/la1J02S+w=="><div class="message-form">
@@ -14,7 +17,6 @@ window.addEventListener('load', function () {
                       <i class="fas fa-image icon"></i>
                     </div>
                     <div class="text-count">
-                      
                       <div id="inputCounter">0</div>
                         /250
                       </div>
@@ -40,12 +42,12 @@ window.addEventListener('load', function () {
     mail_icon.style.color = '#909096'; 
 
     $('.messageUpdate').hide();
-    $('.message').hide();
+    $('.messagesList').hide();
     $('.config-position').hide();
     $('.back-icon').remove();
     $('.message-form').remove();
     $('.detailMessage').remove();
-    $('.messagesList').append(html);
+    $('.messagesBox').append(html);
     $('.message-form').hide().fadeIn(200);
 
   //messageの文字数カウント
@@ -99,6 +101,53 @@ window.addEventListener('load', function () {
         .done(function(data){
           $('#comment_body').val('');
           $('.commentBtn').prop('disabled', false);
+
+          var home_icon = document.getElementById('home-icon');
+          var message_icon = document.getElementById('message-icon');
+          home_icon.style.color = '#5bf7fc';
+          message_icon.style.color = '#909096';
+
+          $('.error-message').remove();
+          var html = window.buildMessageHTML(data, MyPosition, MyPosition);
+          $('.messagesList').prepend(html);
+          $('.messagesList').hide();
+          $('.message-form').hide()
+          $('.messageUpdate').show();
+          $('.messagesList').slideDown(400);
+
+          //メッセージをクリックしたとき
+          //>>click_message.js
+          $('.message').unbind().click(function() {
+            var message_id = $(this).children(':hidden[name="message_id"]').val();
+            window.click_message(message_id, MyPosition);
+          })
+          
+          //マーカの設置
+          if (userLoad_map != null) {
+            var marker_id = data.id
+            var MessageLatLng = new google.maps.LatLng(MyPosition[0],MyPosition[1]);
+            var marker = new google.maps.Marker({
+              id : data.id,
+              map : userLoad_map,             // 対象の地図オブジェクト
+              position : MessageLatLng,   // 緯度・経度
+              animation: google.maps.Animation.DROP
+            });
+          } else {
+            var marker_id = data.id
+            var MessageLatLng = new google.maps.LatLng(MyPosition[0],MyPosition[1]);
+            var marker = new google.maps.Marker({
+              id : data.id,
+              map : load_map,             // 対象の地図オブジェクト
+              position : MessageLatLng,   // 緯度・経度
+              animation: google.maps.Animation.DROP
+            });
+          }
+
+          // マーカーをクリックしたとき
+          //>>click_marker.js
+          marker.addListener('click', function() {
+            window.click_marker(marker_id, MyPosition);
+          });
         })
         .fail(function(data) {
           alert("メッセージ送信に失敗しました");

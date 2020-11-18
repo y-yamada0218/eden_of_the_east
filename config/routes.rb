@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   root "maps#index"
   resources :maps
   resources :messages
+  resources :comments
   resources :search_configs
+  resources :favorites
   post 'message', to: 'maps#message', as: 'get_message' 
+  post 'favorite/delete', to: 'favorites#delete', as: 'delete_favorite' 
 end

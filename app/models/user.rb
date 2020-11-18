@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # geocoded_by :address
   # after_validation :geocode, if: :address_changed?
-  has_many :messages 
-  has_one :search_config
+  has_many :messages, dependent: :destroy
+  has_one :search_config, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

@@ -14,7 +14,9 @@ window.addEventListener('load', function () {
     mail_icon.style.color = '#909096';
     
     $('.messageUpdate').show();
-    $('.message').slideDown(300);
+    $('.message').show();
+    $('.messagesList').hide();
+    $('.messagesList').slideDown(400);
     $('.back-icon').remove();
     $('.config-position').hide();
     $('.detailMessage').remove();
