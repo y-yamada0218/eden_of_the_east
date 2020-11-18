@@ -1,4 +1,4 @@
-import {map} from "./packs/application.js"
+import {load_map} from "./packs/application.js"
   window.addEventListener('load', () => {
   //Geolocation APIに対応しているかどうか判断
   if (navigator.geolocation){
@@ -15,10 +15,10 @@ import {map} from "./packs/application.js"
         mapTypeId: 'roadmap'   //地図の種類
       };
       // 【マップ作成】新たに設定したオプション設定(変数:Options)を指定し、Mapクラスを利用して、マップオブジェクトを再定義。
-      map.setOptions(Options);
+      load_map.setOptions(Options);
 
       var marker = new google.maps.Marker({
-        map : map,             // 対象の地図オブジェクト
+        map : load_map,             // 対象の地図オブジェクト
         center: MyLatLng,    //地図の中心座標
         position : MyLatLng,   // 緯度・経度
         animation: google.maps.Animation.DROP,

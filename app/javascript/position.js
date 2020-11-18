@@ -14,11 +14,11 @@ window.addEventListener('load', function () {
     mail_icon.style.color = '#909096';
 
     $('.messageUpdate').hide();
-    $('.message').hide();
+    $('.messagesList').hide();
     $('.back-icon').remove();
     $('.detailMessage').remove();
     $('.message-form').remove();
-    $('.config-position').show();
+    $('.config-position').fadeIn(200);
 
 
     var select1 = document.querySelector("#time")
@@ -48,7 +48,6 @@ window.addEventListener('load', function () {
         dataType: 'json',
       })
       .done(function(data){
-        console.log("ok")
       })
       .fail(function(data) {
       })

@@ -14,72 +14,21 @@
   .main-tab
     .messagesBox
       .messagesList
-        .config-position
-          %input{name: "config_id", type: "hidden", value: current_user.search_config.id}
-          .tab-name
-            検索条件の設定
-          .select-name
-            検索日時
-          .cp_ipselect.cp_sl04
-            -# ネームを入れてそこのValueをJsで取ってこうとしたが
-            = select_tag :time, options_from_collection_for_select(SearchConditions.all, :value, :name, {selected: current_user.search_config.time})
-          .select-name
-            検索範囲
-          .cp_ipselect.cp_sl04
-            = select_tag :range, options_from_collection_for_select(SearchRange.all,  :value, :name, {selected: current_user.search_config.range})
-      
-        -# .detailMessage
-        -#   .detailMessage__header
-        -#     .user-info
-        -#       .icon
-        -#       .name
-        -#         test
-        -#     .menu
-        -#       %i.fas.fa-angle-down.icon
-        -#   .detailMessage__contener
-        -#     .comment-info
-        -#       .comment
-        -#         うんこ落ちてた
-        -#       .time 
-        -#         17:54 2020-11-20
-        -#     .distance
-        -#       現在地からの距離：
-        -#     .position
-        -#       .latitude
-        -#         = "緯度：  "
-        -#       .longitude
-        -#         = "経度：  "
-        -#   .detailMessage__footer
-        -#     .menu
-        -#       #comment-icon
-        -#         %i.fas.fa-comment-dots.icon
-        -#       #favorit-icon
-        -#         %i.far.fa-heart.icon
-        -#       #mail-icon
-        -#         %i.fas.fa-envelope.icon
-        -#     .problemReport
-        -#       #report-icon
-        -#         %i.fas.fa-exclamation-circle.icon
-        
-        -# .message-form
-        -#   = form_with url: messages_path, method: "POST", id: "new-message", local: true do |f|
-        -#     .message-form
-        -#       .form-header
-        -#       .form-container
-        -#         .user
-        -#           .icon
-        -#         .message-container
-        -#           = f.text_area :comment,{class: "message-container__comment", id: "comment_body", required: "required", maxlength: '250', placeholder: 'ここに何があるかみんなに共有しよう！'}
-        -#           .message-container__footer
-        -#             .image-icon
-        -#               %i.fas.fa-image.icon
-        -#             .text-count
-        -#               #inputCounter
-        -#               = "/250"
-        -#     = f.submit '投稿', class:"commentBtn"
-          
         %button{:class => "messageUpdate", :type => "submit", :id => "btn"}
           更新
+      .config-position
+        %input{name: "config_id", type: "hidden", value: current_user.search_config.id}
+        .tab-name
+          検索条件の設定
+        .select-name
+          検索日時
+        .cp_ipselect.cp_sl04
+          = select_tag :time, options_from_collection_for_select(SearchConditions.all, :value, :name, {selected: current_user.search_config.time})
+        .select-name
+          検索範囲
+        .cp_ipselect.cp_sl04
+          = select_tag :range, options_from_collection_for_select(SearchRange.all,  :value, :name, {selected: current_user.search_config.range})
+          
     .said-bar
       .menu
         #home-icon

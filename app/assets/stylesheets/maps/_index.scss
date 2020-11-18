@@ -1,6 +1,8 @@
-body {
-  background-color: #4b4858;
-}
+// body {
+//   width: 100%;
+//   height: 100%;
+//   background-color: #4b4858;
+// }
 
 .app {
   display: flex;
@@ -91,12 +93,14 @@ body {
 }
 .messagesBox {
   width: 85%;
-  height: auto;
+  background-color: #5e5e68;
+  height: 95%;
   .messagesList {
-    height: 95%;
+    height: 100%;
     width: 100%;
     background-color: #5e5e68;
     overflow: scroll;
+    border-bottom: 1px solid #9d9da1;
     .message {
       display: block;
       border-bottom: 1px solid #9d9da1;
@@ -104,7 +108,7 @@ body {
         display: flex;
         width: auto;
         height: 20%;
-        padding: 4px 5px 5px 0px;
+        padding: 8px 5px 5px 0px;
         &__img {
           height: 27px;
           width: 27px;
@@ -113,8 +117,10 @@ body {
           background-color: red;
         }
         &__name {
+          width: 80%;
           margin-top: 5px;
           margin-left: 8px;
+          border-bottom: 1px solid #9d9da1;
         }
       }
       &__info {
@@ -140,6 +146,28 @@ body {
         font-size: 12px;
       }
     }
+    .error-message {
+      width: 100%;
+      height: 100%;
+      .message-notFound {
+        width: 80%;
+        height: 100%;
+        text-align: center;
+        margin: 60px auto;
+        .error-top {
+          font-size: 24px;
+          font-weight: bold; 
+        }
+        .error-main {
+          font-size: 14px;
+          color: #b5b5b9;
+        }
+        .error-bottom {
+          font-size: 10px;
+          color: #b5b5b9;
+        }
+      }
+    }
   }
   .messageUpdate {
     outline:0;
@@ -161,6 +189,45 @@ body {
     right: 45px;
     padding: 15px;
     position: absolute;
+  }
+}
+
+.comment-form {
+  width: 100%;
+  height: 25%;
+  margin-bottom: 15px;
+  &__contener {
+    display: block;
+    width: 100%;
+    &__comment {
+      width: 80%;
+      height: 100%;
+      color: #fff;
+      margin: 15px 0 0 39px;
+      border-bottom: 1px solid #9d9da1;
+      border-top: 1px solid #9d9da1;
+    }
+  }
+  .text-count {
+    width: 90%;
+    margin-bottom: 6px;
+    font-size: 12px;
+    text-align: right;
+    justify-content: flex-end;
+    display: flex;
+  }
+  .commentPost {
+    justify-content: center;
+    box-sizing: border-box;
+    line-height: 30px;
+    background: #424350;
+    font-weight: bolder;
+    border: 2px solid #5bf7fc;
+    color: #fff;
+    width: 60%;
+    font-size: 14px;
+    border-radius: 100px;
+    margin: 0 70px 0 80px;
   }
 }
 
