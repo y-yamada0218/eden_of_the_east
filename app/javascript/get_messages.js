@@ -1,12 +1,13 @@
 let userLoad_map;
+var MyPosition = [];
 export {userLoad_map}
+export {MyPosition}
 
 window.addEventListener('load', function () {
 var btn = document.getElementById("btn");
 btn.addEventListener('click', function() {  
     
     //現在地のみの配列
-    var MyPosition = [];
     const url = '/message';
     
     //現在地の取得

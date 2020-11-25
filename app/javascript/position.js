@@ -15,6 +15,9 @@ window.addEventListener('load', function () {
 
     $('.messageUpdate').hide();
     $('.messagesList').hide();
+    $('.info-off').hide()
+    $('.info-on').show()
+    $('.user-page').hide()
     $('.back-icon').remove();
     $('.detailMessage').remove();
     $('.message-form').remove();

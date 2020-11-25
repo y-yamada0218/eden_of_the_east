@@ -13,6 +13,9 @@ import {load_map} from "./packs/application.js"
       //メッセージ一覧を隠す
 
       $('.message').hide();
+      $('.info-off').hide()
+      $('.info-on').show()
+      $('.user-page').hide()
       $('.messageUpdate').hide();
       $('.config-position').hide();
       $('.message-form').hide()

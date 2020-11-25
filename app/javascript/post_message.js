@@ -2,13 +2,15 @@ import {userLoad_map} from "./get_messages.js"
 import {load_map} from "./packs/application.js"
 window.addEventListener('load', function () {
   $('.message-form').hide()
+    var current_user = gon.user
   var html = `
               <div class="message-form">
-                <form id="new-message" action="/messages" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="MDtDXFWjHUb5Ug3DWyVicKjro7ZVR8ABfODhWJ/Ai2AGRDwGx6ieIU5F9QSxm6Em1ZZoeQ/bVL75/la1J02S+w=="><div class="message-form">
+                <form id="new-message" action="/messages" accept-charset="UTF-8" method="post">
+                <input type="hidden" name="authenticity_token" value="MDtDXFWjHUb5Ug3DWyVicKjro7ZVR8ABfODhWJ/Ai2AGRDwGx6ieIU5F9QSxm6Em1ZZoeQ/bVL75/la1J02S+w=="><div class="message-form">
                 <div class="form-header"></div>
                 <div class="form-container">
                 <div class="user">
-                  <div class="icon"></div>
+                  <img class="icon" src="${current_user.user_image}" width="50" height="50">
                 </div>
                 <div class="message-container">
                   <textarea class="message-container__comment" id="comment_body" required="required" maxlength="250" placeholder="ここに何があるかみんなに共有しよう！" name="comment"></textarea>
@@ -34,13 +36,15 @@ window.addEventListener('load', function () {
     var search_icon = document.getElementById('search-icon');
     var position_icon = document.getElementById('position-icon');
     var mail_icon = document.getElementById('mail-icon');
-
     home_icon.style.color = '#909096';
     message_icon.style.color = '#5bf7fc';
     search_icon.style.color = '#909096';
     position_icon.style.color = '#909096';
     mail_icon.style.color = '#909096'; 
 
+    $('.info-off').hide()
+    $('.info-on').show()
+    $('.user-page').hide()
     $('.messageUpdate').hide();
     $('.messagesList').hide();
     $('.config-position').hide();
@@ -113,6 +117,7 @@ window.addEventListener('load', function () {
           $('.messagesList').hide();
           $('.message-form').hide()
           $('.messageUpdate').show();
+          $('.user-page').hide()
           $('.messagesList').slideDown(400);
 
           //メッセージをクリックしたとき

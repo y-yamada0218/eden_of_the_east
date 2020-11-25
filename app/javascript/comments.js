@@ -4,9 +4,7 @@
     $('.commenter').remove();
     $('.comment-form').remove();
     $('.comment-icon').html(`<div id="comment-close-icon">
-                              <i class="fas fa-comment-dots icon">
-                                ${comments.length}
-                              </i>
+                              <i class="fas fa-comment-dots icon"></i>
                             </div>`);
 
     //メッセージに対するコメント一覧を生成
@@ -30,13 +28,9 @@
 
     //もう一度コメントボタンが押された場合
     $('#comment-close-icon').click(function() {
-      $('.comment-icon').html(`
-                              <div id="comment-open-icon">
-                                <i class="fas fa-comment-dots icon">
-                                  ${comments.length}
-                                </i>
-                              </div>
-                              `);
+      $('.comment-icon').html(`<div id="comment-open-icon">
+                                <i class="fas fa-comment-dots icon"></i>
+                              </div>`);
       $('.commentBox').slideUp();
 
       $('#comment-open-icon').click(function() {

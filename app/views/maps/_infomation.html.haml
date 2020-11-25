@@ -1,21 +1,50 @@
 .infomation
   .header
-    .info
-      .info__user
+    .info-on
+      .info-on__user
+        = image_tag "#{current_user.user_image}", size:"50x50", class:"info-on__user__img"
+        .info-on__user__name
+          = current_user.name
+      .info-on__sign-out
         = link_to destroy_user_session_path, method:"delete" do
-          .info__user__img
-        .info__user__name
-          test
-      .info__user-cog
-        %i.fas.fa-angle-down.icon
+          %i.fas.fa-sign-out-alt.icon
+    .info-off
+      .info-off__user
+        = image_tag "#{current_user.user_image}", size:"50x50", class:"info-on__user__img"
+        .info-off__user__name
+          = current_user.name
+      .info-off__sign-out
+        = link_to destroy_user_session_path, method:"delete" do
+          %i.fas.fa-sign-out-alt.icon
     .side-top
       .app-icon
+        = image_tag '_i_icon_01309_icon_013095_256.png', size:"50x50"
     
   .main-tab
     .messagesBox
+      .user-page
+        .user-page__header
+          .user-page__icon
+            = image_tag @user.user_image,class:"user-icon"
+        .user-page__profile
+          .user-page__profile__name
+            = @user.name
+        .user-page__user-tab
+          #user-tab__message 
+            %i.far.fa-comment-alt.icon
+          #user-tab__favorite 
+            %i.far.fa-heart.icon
+          #user-tab__DM 
+            %i.fas.fa-envelope.icon
+        .user-page__main-tab
+          .user-page__main-tab__messages
+          .user-page__main-tab__favorites
+          .user-page__main-tab__DM
+            unnko
+
       .messagesList
         %button{:class => "messageUpdate", :type => "submit", :id => "btn"}
-          更新
+          %i.fas.fa-redo-alt.icon
       .config-position
         %input{name: "config_id", type: "hidden", value: current_user.search_config.id}
         .tab-name

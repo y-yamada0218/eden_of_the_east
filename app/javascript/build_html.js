@@ -6,7 +6,7 @@
                   <div class="message">
                     <input type="hidden" name="message_id" value="${message.id}">
                     <div class="message__user">
-                      <div class="message__user__img"></div>
+                      <img class="message__user__img" src="${message.user_image}">
                       <div class="message__user__name">
                         ${message.user_name}
                       </div>
@@ -28,6 +28,35 @@
                   `;
     return html;
   }
+
+  function buildUserMessageHTML(message,messagePosition,MyPosition) { 
+    var range = window.searchRange(messagePosition,MyPosition);
+    const html = `
+                  <div class="user-message">
+                    <input type="hidden" name="message_id" value="${message.id}">
+                    <div class="user-message__user">
+                      <img class="user-message__user__img" src="${message.user_image}">
+                      <div class="user-message__user__name">
+                        ${message.user_name}
+                      </div>
+                    </div>
+                    <div class="user-message__info">
+                      <div class="user-message__info__comment">
+                      ${message.comment}
+                      </div>
+                      <div class="user-message__info__time">
+                        <time datetime="${message.created_at}">
+                          ${moment(message.created_at).fromNow()}
+                        </time>
+                      </div>
+                    </div>
+                    <div class="user-message__distance">
+                      現在地からの距離：  ${range}km
+                    </div>
+                  </div>
+                  `;
+    return html;
+  }
   
   //メッセージの詳細表示
   function buildDetailMessageHTML(messageData, MyPosition) {
@@ -42,7 +71,7 @@
                                   </div>
                                   <div class="detailMessage__header">
                                     <div class="user-info">
-                                      <div class="icon"></div>
+                                      <img class="icon" src="${messageData.user_image}">
                                       <div class="name">
                                         ${messageData.user_name}
                                       </div>
@@ -80,9 +109,7 @@
                                   <div class="menu">
                                     <div class="comment-icon">
                                       <div id="comment-open-icon">
-                                        <i class="fas fa-comment-dots icon">
-                                          ${messageData.comments.length}
-                                        </i>
+                                        <i class="fas fa-comment-dots icon"></i>
                                       </div>
                                     </div>
                                     <div class="detail-icon">
@@ -116,7 +143,7 @@
               <div class="commenter">
                 <div class="commenter__header">
                   <div class="user-info">
-                    <div class="user-img"></div>
+                    <img class="user-img" src="${comment.user_image}">
                     <div class="user-name">
                       ${comment.user_name}
                     </div>
@@ -154,6 +181,7 @@
     
   //関数をグローバル変数にする
   window.buildMessageHTML = buildMessageHTML;
+  window.buildUserMessageHTML = buildUserMessageHTML;
   window.buildDetailMessageHTML = buildDetailMessageHTML;
   window.buildCommentHTML = buildCommentHTML;
   window.commentFormHTML = commentFormHTML;

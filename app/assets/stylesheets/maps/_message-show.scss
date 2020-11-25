@@ -18,7 +18,7 @@
         width: 35px;
         margin-left: 10px;
         border-radius: 50%;
-        background-color: red;
+        border: 2px solid #3599FF;
       }
       .name {
         margin-top: 5px;
@@ -117,7 +117,7 @@
       .commentList {
         height: 290px;
         border-bottom: 2px solid #9d9da1;
-        background-color: #4c4c5a;
+        background-color:  #717184;
         overflow: scroll;
         .commenter {
           border-bottom: 1px solid #9d9da1;
@@ -134,6 +134,7 @@
               display: flex;
               padding: 0px 5px 5px 0px;
               .user-img {
+                border: 2px solid #3599FF;
                 height: 25px;
                 width: 25px;
                 margin-left: 20px;

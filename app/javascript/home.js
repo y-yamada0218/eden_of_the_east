@@ -21,6 +21,10 @@ window.addEventListener('load', function () {
     $('.config-position').hide();
     $('.detailMessage').remove();
     $('.message-form').remove();
+    $('.info-off').hide()
+    $('.info-on').show()
+    $('.user-page').hide()
+    
 
   };
 })
