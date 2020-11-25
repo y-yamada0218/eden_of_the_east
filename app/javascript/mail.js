@@ -20,6 +20,9 @@ window.addEventListener('load', function () {
     $('.back-icon').remove();
     $('.detailMessage').remove();
     $('.message-form').remove();
+    $('.info-off').hide()
+    $('.info-on').show()
+    $('.user-page').hide()
 
   };
 })

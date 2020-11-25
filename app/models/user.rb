@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_one :search_config, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 end

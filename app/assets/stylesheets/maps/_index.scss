@@ -4,6 +4,11 @@
 //   background-color: #4b4858;
 // }
 
+body {
+  font-family: "MS Pゴシック" ;
+  background-color: #3599FF;
+}
+
 .app {
   display: flex;
   height: 100vh;
@@ -20,9 +25,11 @@
   width: 460px;
   height: auto;
   color: #fff;
-  background-color: #424350;
+  background-color: #323b43;
   position: relative;
   border-left: 1px solid #9d9da1;
+  border-right: 3px solid #e83737;
+  border-bottom-right-radius: 17%;
   box-shadow: 0 0 10px rgb(50, 50, 50);
   padding: 8px 10px;
 }
@@ -33,7 +40,7 @@
   margin: 3px 0 0 0;
   border-bottom: 1px solid #9d9da1;
   display: flex;
-  .info {
+  .info-on {
     width: 85%;
     height: 100%;
     display: flex;
@@ -43,34 +50,54 @@
       &__img {
       height: 40px;
       width: 40px;
+      object-fit: fill;
       margin-left: 10px;
+      border: 2px solid #3599FF;
       border-radius: 50%;
-      background-color: red;
       }
       &__name {
         margin-left: 5px;
       }
     }
-    &__user-cog {
+    &__sign-out {
       height: 50px;
       width: 50px;
       margin-right: 20px;
+      font-size: 30px;
+      color: #9d9da1;
+    }
+    .info-on__sign-out:hover {
+      color: #5bf7fc;
+    }
+  }
+  .info-off {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    &__user {
       display: flex;
-      .cog1 {
-        font-size: 32px;
+      &__img {
+      height: 40px;
+      width: 40px;
+      object-fit: fill;
+      margin-left: 10px;
+      border: 2px solid #3599FF;
+      border-radius: 50%;
       }
-      .cog2 {
-        display: block;
-        &__1{
-          margin-top: 4px;
-          font-size: 15px;
-        }
-        &__2{
-          font-size: 12px;
-
-        }
+      &__name {
+        margin-left: 5px;
       }
-
+    }
+    &__sign-out {
+      height: 50px;
+      width: 50px;
+      margin-right: 20px;
+      font-size: 30px;
+      color: #9d9da1;
+    }
+    .info-off__sign-out:hover {
+      color: #5bf7fc;
     }
   }
   .side-top {
@@ -79,9 +106,6 @@
     border-left: 1px solid #9d9da1;
     .app-icon {
       margin-left: 10px;
-      height: 50px;
-      width: 50px;
-      background-color: greenyellow;
     }
   }
 }
@@ -93,12 +117,12 @@
 }
 .messagesBox {
   width: 85%;
-  background-color: #5e5e68;
+  background-color: #525360;
   height: 95%;
   .messagesList {
     height: 100%;
     width: 100%;
-    background-color: #5e5e68;
+    background-color:#525360;
     overflow: scroll;
     border-bottom: 1px solid #9d9da1;
     .message {
@@ -114,7 +138,7 @@
           width: 27px;
           margin-left: 10px;
           border-radius: 50%;
-          background-color: red;
+          border: 2px solid #3599FF;
         }
         &__name {
           width: 80%;
@@ -126,7 +150,7 @@
       &__info {
         width: auto;
         height: 70%;
-        padding: 4px 5px;
+        padding: 4px 5px 15px 25px;
         &__comment {
           font-size: 14px;
           word-wrap: break-word;
@@ -135,13 +159,15 @@
           margin-top: 10px;
           text-align: right;
           font-size: 11px;
+          color:#5bf7fc;
         }
       }
       &__distance {
         color: #a8a8b7;
         width: auto;
         height: 10%;
-        padding-bottom: 2px;
+        padding-bottom: 10px;
+        padding-left: 10px;
         display: flex;
         font-size: 12px;
       }
@@ -181,7 +207,7 @@
     color: #fff;
     width: 75px;
     height: 75px;
-    font-size: 18px;
+    font-size: 30px;
     border-radius: 50%;
     margin: 0 40px 20px 80px;
     text-align: center;
@@ -270,4 +296,10 @@
     height: auto;
 
   }
+}
+.fas.fa-sign-out-alt.icon {
+  color: #9d9da1;
+}
+.fas.fa-sign-out-alt.icon:hover {
+  color: #5bf7fc;
 }

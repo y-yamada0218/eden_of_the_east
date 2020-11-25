@@ -1,17 +1,93 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+-# %h2 Log in
+-# = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+-#   .field
+-#     = f.label :email
+-#     %br/
+-#     = f.email_field :email, autofocus: true, autocomplete: "email"
+-#   .field
+-#     = f.label :password
+-#     %br/
+-#     = f.password_field :password, autocomplete: "current-password"
+-#   - if devise_mapping.rememberable?
+-#     .field
+-#       = f.check_box :remember_me
+-#       = f.label :remember_me
+-#   .actions
+-#     = f.submit "Log in"
+-# = render "devise/shared/links"
+.login-form
+  .login-form__left
+    .login-form__left__backimage
+    .login-form__left__contents
+      .content-box
+        .content
+          .icon
+            %i.fas.fa-map-marker-alt.icon
+          .text
+            ここに「何」があるか共有しよう。
+        .content
+          .icon
+            %i.fas.fa-search.icon
+          .text
+            ここの周りに何があるか探そう。
+        .content
+          .icon
+            %i.far.fa-comment-dots.icon
+          .text
+            ここにメッセージを残そう。
+  .login-form__right
+    .app-info
+      .app-icon
+        = image_tag '_i_icon_01309_icon_013095_256.png', size:"70x70"
+      .welcome
+        Welcome  To  Spotter!
+      .intro
+        いま「この場所」で起きていることを共有しよう
+    .a
+      .form
+        %form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/users/sign_in", :method => "post"}
+          %input{:name => "authenticity_token", :type => "hidden", :value => "UkfabiDx7FezQq3yjNX/WlzP/chgeNtBkXInDed8LlwR/GYu4Jhs/s0LOvidn/DRxC1JNQ0KssNwf37tYm3Ovg=="}/
+          .text-input
+            %label{:for => "user_email"} Email
+            %input#user_email{:autocomplete => "email", :autofocus => "autofocus", :name => "user[email]", :type => "email", :value => ""}/
+            %span.separator
+          .text-input
+            %label{:for => "user_password"} Password
+            %input#user_password{:autocomplete => "current-password", :name => "user[password]", :type => "password"}/
+            %span.separator
+          .form-bottom
+            %input{"data-disable-with" => "Log in", :name => "commit", :type => "submit", :value => "Log in"}/
+            %a.original-src{:href => "#"}アカウントを忘れた方 
+    .sign-up
+      .info
+        Spotterをはじめよう！
+      = link_to new_user_registration_path do
+        .acount-createBtn
+          アカウント作成
+.app-footer
+  .app-footer__infomation
+    .content
+      Spotterについて
+    .content
+      ヘルプセンター
+    .content
+      利用規約
+    .content
+      プライバシーポリシー
+    .content
+      Cookieのポリシー
+    .content
+      広告情報
+    .content
+      ブログ
+    .content
+      ステータス
+    .content
+      ブランドリソース
+    .content
+      広告
+    .content
+      マーケティング
+    .content
+      設定
+  Spotter  2020, Inc.

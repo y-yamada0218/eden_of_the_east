@@ -1,4 +1,6 @@
 import {load_map} from "./packs/application.js"
+var startMyPosition = [];
+export {startMyPosition}
   window.addEventListener('load', () => {
   //Geolocation APIに対応しているかどうか判断
   if (navigator.geolocation){
@@ -8,6 +10,7 @@ import {load_map} from "./packs/application.js"
       function getPosition(position) {
       //緯度・経度を変数に格納
       var MyLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      startMyPosition.push(position.coords.latitude, position.coords.longitude);
       //googlemapの設定を変数に格納 
       var Options = {
         zoom: 14,      //地図の縮尺値

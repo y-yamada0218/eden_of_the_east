@@ -18,6 +18,7 @@ require("@rails/ujs").start();
 // require("turbolinks").start();
 require("@rails/activestorage").start();
 require("../channels");
+require("sign_in")
 require("get_position");
 require("home");
 require("post_message");
@@ -31,6 +32,7 @@ require("build_html");
 require("click_marker");
 require("click_messages");
 require("get_messages");
+require("user_page")
 require("test");
 
 

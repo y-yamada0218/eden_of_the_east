@@ -2,6 +2,7 @@ class Message < ApplicationRecord
   
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def self.search_from_current_location(my_position,range,search_time)
     messages = Message.where(created_at: search_time.hours.ago..)

@@ -1,25 +1,100 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.login-form
+  .login-form__left
+    .login-form__left__backimage
+    .login-form__left__contents
+      .content-box
+        .content
+          .icon
+            %i.fas.fa-map-marker-alt.icon
+          .text
+            ここに「何」があるか共有しよう。
+        .content
+          .icon
+            %i.fas.fa-search.icon
+          .text
+            ここの周りに何があるか探そう。
+        .content
+          .icon
+            %i.far.fa-comment-dots.icon
+          .text
+            ここにメッセージを残そう。
+  .login-form__right
+    .app-info
+      .app-icon
+        = image_tag '_i_icon_01309_icon_013095_256.png', size:"70x70"
+      .welcome
+      .intro
+        はじめまして！Spotter を利用するにはアカウントを登録しよう！
+    .a
+      .form
+        %form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/users", :method => "post"}
+          %input{:name => "authenticity_token", :type => "hidden", :value => "UkfabiDx7FezQq3yjNX/WlzP/chgeNtBkXInDed8LlwR/GYu4Jhs/s0LOvidn/DRxC1JNQ0KssNwf37tYm3Ovg=="}/
+          .text-input
+            %label{:for => "user_name"} name
+            %input#user_name{:autocomplete => "name", :autofocus => "autofocus", :name => "user[name]", :type => "text", :value => ""}/
+            %span.separator
+          .text-input
+            %label{:for => "user_email"} Email
+            %input#user_email{:autocomplete => "email", :autofocus => "autofocus", :name => "user[email]", :type => "email", :value => ""}/
+            %span.separator
+          .text-input
+            %label{:for => "user_password"} Password
+            %input#user_password{:autocomplete => "new-password", :name => "user[password]", :type => "password"}/
+            %span.separator
+          .text-input
+            %label{:for => "user_password_confirmation"} Password
+            %input#user_password_confirmation{:autocomplete => "new-password", :name => "user[password_confirmation]", :type => "password"}/
+            %span.separator
+          .form-bottom
+            %input{"data-disable-with" => "Sign up", :name => "commit", :type => "submit", :value => "Sign up"}/
+            %a.original-src{:href => "/users/sign_in"}アカウントをすでにお持ちの方
+.app-footer
+  .app-footer__infomation
+    .content
+      Spotterについて
+    .content
+      ヘルプセンター
+    .content
+      利用規約
+    .content
+      プライバシーポリシー
+    .content
+      Cookieのポリシー
+    .content
+      広告情報
+    .content
+      ブログ
+    .content
+      ステータス
+    .content
+      ブランドリソース
+    .content
+      広告
+    .content
+      マーケティング
+    .content
+      設定
+  Spotter  2020, Inc.
+
+-# %form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/users", :method => "post"}
+-#   %input{:name => "authenticity_token", :type => "hidden", :value => "z3dnwmBsgube77yT217vAaNS7zZWY4H3hZS3Q/cLcPSWBU7xmF+sJBKLnxfdFWo3iapTGnJe4cx4objm3fxRDA=="}/
+-#   .field
+-#     %label{:for => "user_name"} Name
+-#     %br/
+-#     %input#user_name{:autocomplete => "name", :autofocus => "autofocus", :name => "user[name]", :type => "text", :value => ""}/
+-#   .field
+-#     %label{:for => "user_email"} Email
+-#     %br/
+-#     %input#user_email{:autocomplete => "email", :autofocus => "autofocus", :name => "user[email]", :type => "email", :value => ""}/
+-#   .field
+-#     %label{:for => "user_password"} Password
+-#     %em
+-#       (6 characters minimum)
+-#     %br/
+-#     %input#user_password{:autocomplete => "new-password", :name => "user[password]", :type => "password"}/
+-#   .field
+-#     %label{:for => "user_password_confirmation"} Password confirmation
+-#     %br/
+-#     %input#user_password_confirmation{:autocomplete => "new-password", :name => "user[password_confirmation]", :type => "password"}/
+-#   .actions
+-#     %input{"data-disable-with" => "Sign up", :name => "commit", :type => "submit", :value => "Sign up"}/

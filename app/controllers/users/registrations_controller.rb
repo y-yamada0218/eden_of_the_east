@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create
-    build_resource(sign_up_params)
+    build_resource(sign_up_params.merge(user_image: "/assets/default_image-16034c6c0806b754b298023da637baa7a9459245a6b4788b720c263c9f9e09de.jpg"))
     if resource.save
       SearchConfig.create(range: 1, time: 1, user_id: resource.id)
     end
