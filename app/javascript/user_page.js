@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
     $('.message-form').remove();
     $('.info-on').hide()
     $('.info-off').show()
-    $('.user-page').slideDown(500)
+    $('.user-page').slideDown(400)
 
     if (MyPosition.length != 0) {
       var Position = MyPosition;
@@ -54,7 +54,6 @@ window.addEventListener('load', () => {
 
         //取得したメッセージを表示させる
         //>>build_html.js
-        console.log(Position)
         var html = window.buildUserMessageHTML(messages[i],messagePosition,Position);
         $('.user-page__main-tab__messages').prepend(html);
 

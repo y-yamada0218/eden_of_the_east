@@ -66,7 +66,6 @@ import {load_map} from "./packs/application.js"
     })
     .done(function(messageData){
       //メッセージ一覧を隠す
-      console.log(123456)
       $('.user-message').hide()
       var detailMessagehtml = window.buildDetailMessageHTML(messageData,MyPosition);
       $('.user-page__main-tab__messages').append(detailMessagehtml);
